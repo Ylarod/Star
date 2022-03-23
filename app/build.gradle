@@ -16,11 +16,27 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        splits {
+            boolean isReleaseTask = gradle.startParameter.taskNames.any { it.contains("Release") }
+            if (!isReleaseTask) {
+                // debug 使用 ndk 过滤方式（splits 执行时机太靠前了，ndk配置在 buildTypes 中不生效）
+                android.defaultConfig.ndk { abiFilters "arm64-v8a" }
+            }
+            // release 才会启用 abi 分割
+            abi {
+                enable isReleaseTask
+                reset()
+                include "armeabi-v7a", "arm64-v8a"
+                universalApk true
+            }
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled true
+            shrinkResources = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
