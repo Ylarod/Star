@@ -1,6 +1,6 @@
 # 签到助手
 
-**超星学习通签到助手 | [下载](https://github.com/Edsuns/Star/releases)**
+**超星学习通签到助手 | [下载](https://github.com/Ylarod/Star/releases)**
 
 支持的签到：
 

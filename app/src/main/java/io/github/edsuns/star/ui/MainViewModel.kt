@@ -35,6 +35,6 @@ class MainViewModel : ViewModel() {
     }
 
     companion object {
-        private const val INFO_URL = "https://github.com/Edsuns/Star"
+        private const val INFO_URL = "https://github.com/Ylarod/Star"
     }
 }
