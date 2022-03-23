@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: macOS-latest
+    if: ${{ !startsWith(github.event.head_commit.message, '[skip ci]') && github.repository_owner == 'Ylarod' }}
     steps:
     - uses: actions/checkout@v2
     - name: set up JDK 11
@@ -17,6 +18,32 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         cache: gradle
+    - name: Extract keystore file
+      run: |
+        touch sign.properties
+        echo KEYSTORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }} >> sign.properties
+        echo KEY_ALIAS=${{ secrets.KEY_ALIAS }} >> sign.properties
+        echo KEY_PASSWORD='${{ secrets.KEY_PASSWORD }}' >> sign.properties
+        echo KEYSTORE_FILE=../keystore.jks >> sign.properties
+        echo ${{ secrets.KEYSTORE }} | base64 --decode > keystore.jks
+    - name: Cache Gradle Dependencies
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+          !~/.gradle/caches/build-cache-*
+        key: gradle-deps-app-${{ hashFiles('**/build.gradle') }}
+        restore-keys: |
+          gradle-deps
+    - name: Cache Gradle Build
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches/build-cache-*
+        key: gradle-builds-app-${{ github.sha }}
+        restore-keys: |
+          gradle-builds
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
@@ -25,4 +52,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: macOS-latest-artifact
-        path: app/build/outputs
+        path: app/build/outputs/apk/release/*.apk

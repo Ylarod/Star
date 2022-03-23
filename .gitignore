@@ -81,3 +81,6 @@ lint/tmp/
 
 # Release files
 release/
+
+sign.properties
+star.jks
