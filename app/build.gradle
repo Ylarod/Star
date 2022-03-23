@@ -74,7 +74,7 @@ dependencies {
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
 
-    implementation 'com.google.zxing:core:3.3.3'
+    implementation 'io.github.devilsen:czxing:1.1.0'
 
     implementation(project(':chaoxing'))
 }

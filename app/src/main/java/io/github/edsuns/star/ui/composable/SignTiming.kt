@@ -27,7 +27,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.google.zxing.*
 import io.github.edsuns.chaoxing.model.Timing
 import io.github.edsuns.star.R
 import io.github.edsuns.star.Repository
