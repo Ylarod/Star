@@ -96,6 +96,10 @@ dependencies {
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
 
     implementation 'io.github.devilsen:czxing:1.1.0'
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+
+    def multidex_version = "2.0.1"
+    implementation "androidx.multidex:multidex:$multidex_version"
 
     implementation(project(':chaoxing'))
 }
