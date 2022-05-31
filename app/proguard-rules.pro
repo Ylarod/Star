@@ -25,3 +25,4 @@
 
 -keep class me.devilsen.czxing.**
 -keep class me.devilsen.czxing.** { *; }
+-keep class org.json.** { *; }
